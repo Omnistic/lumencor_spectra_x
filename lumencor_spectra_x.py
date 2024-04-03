@@ -129,19 +129,6 @@ class lumencor_spectra_x:
         if dac_1A_colors_byte:
             self.sr.write(b"\x53\x1A\x03" + struct.pack("B", dac_1A_colors_byte) + struct.pack("B", intensity_byte_two) + struct.pack("B", intensity_byte_one) + b"\x50")
 
-    def set_one_intensity(self, color: str, intensity: int)-> None:
-        if color in DAC_IIC_ADDRESS_18:
-            dac_byte = b"\x18"
-        elif color in DAC_IIC_ADDRESS_1A:
-            dac_byte = b"\x1A"
-
-        # Change intensity convention (0 is full intensity and 255 is off in the serial command, I want it to be 0 is off and 255 is full intensity in the Python function)
-        intensity = 255 - intensity
-        byte_one = intensity % 16 << 4
-        byte_two = intensity // 16 + 240
-
-        self.sr.write(b"\x53" + dac_byte + b"\x03" + struct.pack("B", LED_INTENSITY[color]) + struct.pack("B", byte_two) +  struct.pack("B", byte_one) + b"\x50")
-
     def get_temperature(self):
         """
         Temperature is read from the serial port as two bytes. The decimal representation of the eleven most significant bits times
@@ -184,6 +171,7 @@ def main():
     time.sleep(1)
 
     print("Engine temp: {:.2f}deg".format(my_lamp.get_temperature()))
+
     my_lamp.close()
 
 if __name__ == "__main__":
