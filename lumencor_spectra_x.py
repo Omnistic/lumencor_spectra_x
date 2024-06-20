@@ -134,8 +134,14 @@ class lumencor_spectra_x:
         Temperature is read from the serial port as two bytes. The decimal representation of the eleven most significant bits times
         the temperature factor (0.125) gives the temperature in degrees Celsius.
         """
+        
+        self.sr.reset_input_buffer()
+        self.sr.reset_output_buffer()
+
         # Send command to ask the device to send the temperature
         self.sr.write(b"\x53\x91\x02\x50")
+
+        time.sleep(0.1)
 
         # Convert the recieved bytes to temperature
         temperature = ( int.from_bytes(self.sr.read(2), "big" ) >> 5) * TEMPERATURE_FACTOR

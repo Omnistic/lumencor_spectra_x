@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 from lumencor_spectra_x import lumencor_spectra_x, LED_ENABLE
 
 def main():
-    my_lamp = lumencor_spectra_x("COM3")
+    my_lamp = lumencor_spectra_x("COM8")
 
     layout = [[], [], [], []]
 
@@ -45,7 +45,8 @@ def main():
             my_lamp.set_intensity(event[:-10], int(values[event]))
 
         if event == "temperature":
-            window["temperature_text"].update("Temperature: {:.2f} °C".format(my_lamp.get_temperature()))
+            new_temperature_text = "Temperature: {:.2f} °C".format(my_lamp.get_temperature())
+            window["temperature_text"].update(new_temperature_text)
 
         if event == "OK" or event == sg.WIN_CLOSED:
             break
