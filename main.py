@@ -15,8 +15,6 @@ def toggle_connection():
             ui.notify(f"Connection failed: {e}")
     else:
         if 'spectra_x' in globals():
-            spectra_x.close()
-
             red_switch.value = False
             green_switch.value = False
             cyan_switch.value = False
@@ -32,6 +30,8 @@ def toggle_connection():
 
             temperature_timer.deactivate()
             temperature_label.text = ''
+
+            spectra_x.close()
 
             ui.notify("Disconnected from SPECTRA X.")
         else:
