@@ -1,0 +1,12 @@
+[workspace]
+channels = ["conda-forge"]
+name = "lumencor_spectra_x"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[tasks]
+start = "python main.py"
+
+[dependencies]
+pyserial = ">=3.5,<4"
+nicegui = ">=2.22.2,<3"

@@ -149,32 +149,58 @@ class lumencor_spectra_x:
         return temperature
 
 def main():
-    my_lamp = lumencor_spectra_x("COM3")
+    my_lamp = lumencor_spectra_x("COM14")
 
-    print("Turn on a LED at full power (255)")
-    color = "red"
-    my_lamp.toggle_leds(color)
-    my_lamp.set_intensity(color, 255)
+    my_lamp.toggle_leds("red")
+    my_lamp.set_intensity("red", 255)
+    time.sleep(5)
+    my_lamp.toggle_leds("red")
 
-    time.sleep(1)
+    my_lamp.toggle_leds("green")
+    my_lamp.set_intensity("green", 255)
+    time.sleep(5)
+    my_lamp.toggle_leds("green")
 
-    write = sys.stdout.write
-    write("Vary intensity (255 to 0):    ")
-    for ii in range(255, -1, -1):
-        write("\b\b\b")
-        write("{:3d}".format(ii)),
-        my_lamp.set_intensity(color, ii)
-        time.sleep(0.01)
-    my_lamp.toggle_leds(color)
-    write("\n")
+    my_lamp.toggle_leds("cyan")
+    my_lamp.set_intensity("cyan", 255)
+    time.sleep(5)
+    my_lamp.toggle_leds("cyan")
 
-    time.sleep(1)
+    my_lamp.toggle_leds("uv")
+    my_lamp.set_intensity("uv", 255)
+    time.sleep(5)
+    my_lamp.toggle_leds("uv")
 
-    print("Turn on two LEDs at full power (255)")
-    my_lamp.toggle_leds(["red", "green"])
-    my_lamp.set_intensity(["red", "green"], 255)
+    my_lamp.toggle_leds("blue")
+    my_lamp.set_intensity("blue", 255)
+    time.sleep(5)
+    my_lamp.toggle_leds("blue")
 
-    time.sleep(1)
+    my_lamp.toggle_leds("teal")
+    my_lamp.set_intensity("teal", 255)
+    time.sleep(5)
+    my_lamp.toggle_leds("teal")
+
+    # time.sleep(5)
+
+    # my_lamp.toggle_leds("teal")
+    # write = sys.stdout.write
+    # write("Vary intensity (255 to 0):    ")
+    # for ii in range(255, -1, -1):
+    #     write("\b\b\b")
+    #     write("{:3d}".format(ii)),
+    #     my_lamp.set_intensity("teal", ii)
+    #     time.sleep(0.1)
+    # my_lamp.toggle_leds("teal")
+    # write("\n")
+
+    # time.sleep(1)
+
+    # print("Turn on two LEDs at full power (255)")
+    # my_lamp.toggle_leds(["red", "green"])
+    # my_lamp.set_intensity(["red", "green"], 255)
+
+    # time.sleep(1)
 
     print("Engine temp: {:.2f}deg".format(my_lamp.get_temperature()))
 
